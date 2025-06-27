@@ -1,9 +1,9 @@
 #ifndef BOSS_H
 #define BOSS_H
 
-#include "Audio.h"
-#include "DynamicModel.h"
-#include "Quads2D.h"
+#include "../src/Audio.h"
+#include "../src/DynamicModel.h"
+#include "../src/Quads2D.h"
 
 class Player; //If we use include, we get a circular dependency
 

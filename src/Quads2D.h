@@ -6,10 +6,10 @@
 
 #include <vector>
 
-#include "IndexBuffer.h"
+#include "../IndexBuffer.h"
 #include "Renderer.h"
 #include "Shader.h"
-#include "VertexArray.h"
+#include "../VertexArray.h"
 
 class Quads2D {
 public:

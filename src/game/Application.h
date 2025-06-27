@@ -1,9 +1,9 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "Input.h"
-#include "Player.h"
-#include "Util.h"
+#include "../src/Input.h"
+#include "../src/Player.h"
+#include "../src/Util.h"
 
 class Application
 {

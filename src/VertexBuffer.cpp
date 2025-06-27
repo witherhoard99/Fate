@@ -1,4 +1,4 @@
-#include "VertexBuffer.h"
+#include "../VertexBuffer.h"
 #include <GL/glew.h>
 
 VertexBuffer::VertexBuffer() {}

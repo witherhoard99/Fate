@@ -1,7 +1,7 @@
 //Engine Includes
 #include "Application.h"
 #include "Scene1.h"
-#include "WindowsOnly.h"
+#include "../src/WindowsOnly.h"
 
 //Jolt includes
 #include <Jolt/Jolt.h>

@@ -1,7 +1,7 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include "Util.h"
+#include "../Util.h"
 
 #include "Renderer.h"
 #include "Shader.h"

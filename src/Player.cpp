@@ -1,7 +1,7 @@
-#include "Util.h"
-#include "Player.h"
+#include "../Util.h"
+#include "../Player.h"
 #include "Input.h"
-#include "game/Boss.h"
+#include "../game/Boss.h"
 #include "imgui/imgui.h"
 
 Player::Player(

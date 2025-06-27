@@ -3,15 +3,15 @@
 
 #include "Boss.h"
 #include "DynamicModel.h"
-#include "Util.h"
-#include "Input.h"
+#include "../src/Util.h"
+#include "../src/Input.h"
 #include "Physics.h"
-#include "Player.h"
-#include "Shader.h"
-#include "Model.h"
-#include "Quads2D.h"
-#include "Quads3D.h"
-#include "StaticModel.h"
+#include "../src/Player.h"
+#include "../src/Shader.h"
+#include "../src/Model.h"
+#include "../src/Quads2D.h"
+#include "../src/Quads3D.h"
+#include "../src/StaticModel.h"
 #include "imgui/imgui.h"
 
 class Scene1

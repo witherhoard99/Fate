@@ -1,5 +1,5 @@
 #include "Boss.h"
-#include "Player.h"
+#include "../src/Player.h"
 
 int Boss::m_numBosses = 0;
 
