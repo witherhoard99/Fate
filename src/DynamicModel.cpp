@@ -1,4 +1,4 @@
-#include "../DynamicModel.h"
+#include "DynamicModel.h"
 
 #include "imgui/imgui.h"
 #include "Physics/Collision/CastResult.h"

@@ -1,7 +1,7 @@
 #ifndef JOLTPHYSICSIMPLS_H
 #define JOLTPHYSICSIMPLS_H
 
-#include "../Util.h"
+#include "Util.h"
 #include "Renderer.h"
 #include "Shader.h"
 
