@@ -45,55 +45,55 @@ endif()
 
 # Add all files
 add_executable(learnOpenGL
-        Util.h
-        WindowsOnly.h
+        src/Util.h
+        src/WindowsOnly.h
 
-        VertexBuffer.cpp
-        VertexBuffer.h
-        IndexBuffer.cpp
-        IndexBuffer.h
-        VertexArray.cpp
-        VertexArray.h
-        VertexBufferLayout.cpp
-        VertexBufferLayout.h
-        Shader.cpp
-        Shader.h
-        Renderer.cpp
-        Renderer.h
-        Texture.cpp
-        Texture.h
+        src/VertexBuffer.cpp
+        src/VertexBuffer.h
+        src/IndexBuffer.cpp
+        src/IndexBuffer.h
+        src/VertexArray.cpp
+        src/VertexArray.h
+        src/VertexBufferLayout.cpp
+        src/VertexBufferLayout.h
+        src/Shader.cpp
+        src/Shader.h
+        src/Renderer.cpp
+        src/Renderer.h
+        src/Texture.cpp
+        src/Texture.h
 
-        Quads3D.cpp
-        Quads3D.h
-        Constants.h
-        Player.cpp
-        Player.h
-        Input.cpp
-        Input.h
+        src/Quads3D.cpp
+        src/Quads3D.h
+        src/Constants.h
+        src/Player.cpp
+        src/Player.h
+        src/Input.cpp
+        src/Input.h
 
-        Physics.cpp
-        Physics.h
-        PhysicsObjectFactory.cpp
-        PhysicsObjectFactory.h
+        src/Physics.cpp
+        src/Physics.h
+        src/PhysicsObjectFactory.cpp
+        src/PhysicsObjectFactory.h
 
-        Model.cpp
-        Model.h
-        StaticModel.cpp
-        StaticModel.h
-        DynamicModel.cpp
-        DynamicModel.h
-        Mesh.cpp
-        Mesh.h
+        src/Model.cpp
+        src/Model.h
+        src/StaticModel.cpp
+        src/StaticModel.h
+        src/DynamicModel.cpp
+        src/DynamicModel.h
+        src/Mesh.cpp
+        src/Mesh.h
 
-        FrustumCulling.h
+        src/FrustumCulling.h
 
-        game/truemain.cpp
-        game/Application.cpp
-        game/Application.h
-        game/Scene1.cpp
-        game/Scene1.h
-        game/Boss.cpp
-        game/Boss.h
+        src/game/truemain.cpp
+        src/game/Application.cpp
+        src/game/Application.h
+        src/game/Scene1.cpp
+        src/game/Scene1.h
+        src/game/Boss.cpp
+        src/game/Boss.h
 
         vendor/imgui/imconfig.h
         vendor/imgui/imgui.cpp
@@ -114,10 +114,10 @@ add_executable(learnOpenGL
 
         vendor/stb_image/stb_image.cpp
         vendor/stb_image/stb_image.h
-        Audio.cpp
-        Audio.h
-        Quads2D.cpp
-        Quads2D.h
+        src/Audio.cpp
+        src/Audio.h
+        src/Quads2D.cpp
+        src/Quads2D.h
 )
 
 # More assimp stuff (https://github.com/unsettledgames/debut-engine/blob/main/Debut/CMakeLists.txt)
@@ -135,8 +135,10 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/Dependencies/assimp/)
 add_subdirectory(${CMAKE_SOURCE_DIR}/Dependencies/sfml/)
 
 # All including directories
-# This is so that things inside the game directory can include without doing "../"
-target_include_directories(learnOpenGL PRIVATE ${CMAKE_SOURCE_DIR})
+# This is so that we an include without doing "../" or "game/" within our own src files
+target_include_directories(learnOpenGL PRIVATE ${CMAKE_SOURCE_DIR}/src/game)
+target_include_directories(learnOpenGL PRIVATE ${CMAKE_SOURCE_DIR}/src)
+
 target_include_directories(learnOpenGL PRIVATE ${CMAKE_SOURCE_DIR}/Dependencies/assimp/include)
 target_include_directories(learnOpenGL PRIVATE ${CMAKE_SOURCE_DIR}/Dependencies/glew-2.1.0/include)
 target_include_directories(learnOpenGL PRIVATE ${CMAKE_SOURCE_DIR}/vendor/)
@@ -153,12 +155,14 @@ target_include_directories(learnOpenGL PRIVATE
 if (CMAKE_CROSSCOMPILING)
     message(STATUS "Cross compiling from linux to windows.")
 endif ()
+
 if (WIN32)
     target_link_libraries(learnOpenGL winmm) # We need this for the timerBeginPeriod and timerEndPeriod calls
 
     # I'm not sure from what library, but we have massive stack allocations that can sometimes cause a stack overflow on windows
+    # So we need to increase the stack size
     # My guess is that it is from Jolt (JPH_PROFILE_THREAD)?
-    # Linux allocates more stack space by default so we are find on linux, and linux stack size is set at runtime anyway
+    # Linux allocates more stack space by default so we are fine on linux, and linux stack size is set at runtime anyway
     if (MSVC)
         target_link_options(learnOpenGL PRIVATE "/STACK:8388608")
     else ()
