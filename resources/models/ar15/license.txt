@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ar15
+* source:	https://sketchfab.com/3d-models/ar15-924e1cc70ce34c8887c3031f7658889b
+* author:	wburton (https://sketchfab.com/wburton95)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ar15" (https://sketchfab.com/3d-models/ar15-924e1cc70ce34c8887c3031f7658889b) by wburton (https://sketchfab.com/wburton95) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

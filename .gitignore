@@ -1,0 +1,8 @@
+cmake-build-debug/
+cmake-build-release/
+cmake-build-relwithdebinfo/
+.idea/
+TheJPHDumpFiles/
+Dependencies/assimp/cmake-build-release
+Dependencies/assimp/cmake-build-debug
+Dependencies/assimp/cmake-build-windowsrelease
