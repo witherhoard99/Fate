@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 project(learnOpenGL)
 
-# General set's
+# General sets
 set(CMAKE_CXX_STANDARD 23)
 
 # Assimp sets
@@ -11,10 +11,14 @@ set(ASSIMP_NO_EXPORT ON CACHE INTERNAL "" FORCE)
 set(ASSIMP_BUILD_TESTS OFF CACHE INTERNAL "" FORCE)
 set(ASSIMP_BUILD_ASSIMP_TOOLS OFF CACHE INTERNAL "" FORCE)
 
+# Jolt set
+set(CPP_RTTI_ENABLED ON CACHE INTERNAL "" FORCE)
+
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(OpenGL_GL_PREFERENCE GLVND)
 endif()
 
+# All compile definitions
 # assimp has "#pragma warnings" that stop compilation due to -Werror
 add_compile_options(-Wno-unknown-pragmas)
 add_compile_definitions(GLEW_STATIC)
