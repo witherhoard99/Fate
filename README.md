@@ -23,7 +23,7 @@ Fate is a 3D video game made in C++ using OpenGL and GLSL.
 * Windows with Visual Studio: Not tested, but should work
 
 
-##### Notes
+### Notes
 * Mainly compiled/tested on Linux with GCC and Ninja
 * Assimp is very difficult on compile on MinGW, but all other code should compile. 
   * Incase you are unable to compile Assimp, Windows and Linux binaries for Assimp are also in releases: (TODO: INSERT URL HERE)
