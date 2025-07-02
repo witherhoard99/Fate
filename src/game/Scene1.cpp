@@ -27,10 +27,10 @@ Scene1::Scene1(
         m_physics(physics),
         m_renderer(renderer),
         m_player(player),
-        m_cityModel(m_renderer, "../resources/models/city/scene.gltf", m_physics),
+        m_cityModel(m_renderer, "../resources/models/city/scene.gltf", m_physics, m_frustumCuller),
         m_ar15(m_renderer, "../resources/models/ar15/scene.gltf"),
-        m_spaceship1(m_renderer, "../resources/models/spaceship/scene.gltf", m_physics),
-        m_spaceship2(m_renderer, "../resources/models/spaceship2/scene.gltf", m_physics, JPH::Mat44::sScale(2.5)),
+        m_spaceship1(m_renderer, "../resources/models/spaceship/scene.gltf", m_physics, m_frustumCuller),
+        m_spaceship2(m_renderer, "../resources/models/spaceship2/scene.gltf", m_physics, m_frustumCuller, JPH::Mat44::sScale(2.5)),
         m_spaceship1Boss(m_spaceship1, 500),
         m_spaceship2Boss(m_spaceship2, 500),
         m_window(window),
@@ -134,6 +134,8 @@ void Scene1::MainLoop()
         if (m_player.GetExitProgram())
             break;
     }
+
+    DumpStatistics();
 
     m_quit.store(true, std::memory_order_release);
 

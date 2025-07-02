@@ -15,7 +15,7 @@ Player::Player(
 	m_front(0.0f, 0.0f, -1.0f),
 	m_worldUp(up),
 	m_shootSound("../resources/audio/m4-fire-loop.mp3", true, 25),
-	m_hitSound("../resources/audio/bullet-hit-loop-speed.mp3", true, 75)
+	m_hitSound("../resources/audio/bullet-hit-loop-speed.mp3", true, 50)
 {
 	m_position = position;
 	m_yaw = yaw;

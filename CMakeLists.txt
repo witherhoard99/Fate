@@ -122,6 +122,8 @@ add_executable(learnOpenGL
         src/Audio.h
         src/Quads2D.cpp
         src/Quads2D.h
+        src/JPHImpls.cpp
+        src/JPHImpls.h
 )
 
 # More assimp stuff (https://github.com/unsettledgames/debut-engine/blob/main/Debut/CMakeLists.txt)

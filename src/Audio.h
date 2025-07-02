@@ -15,38 +15,31 @@ private:
     sf::Sound m_sound;
 
 public:
-    explicit Audio(const std::string& filename, bool loopSound, float volume) :
-        m_soundBuffer(filename),
-        m_sound(m_soundBuffer)
-    {
-        m_sound.setLooping(loopSound);
-        m_sound.setSpatializationEnabled(false);
-        m_sound.setVolume(volume);
-    }
+    explicit Audio(const std::string& filename, bool loopSound, float volume);
 
-    void StartPlaying()
-    {
-        m_sound.play();
-    }
+    /**
+     * If the sound is paused, it plays from there
+     * If the sound is already playing, it plays from the beginning
+     * If the sound is stopped, it plays from beginning
+     */
+    void StartPlaying() { m_sound.play(); }
 
-    void ContinuePlaying()
-    {
-        sf::Sound::Status status = m_sound.getStatus();
-        if (status == sf::Sound::Status::Playing)
-            return;
-        if (status == sf::Sound::Status::Paused || status == sf::Sound::Status::Stopped)
-            m_sound.play();
-    }
+    /**
+     * If the sound is paused, it plays from there
+     * If the sound is playing, this method does nothing (the sound continues to play as normal)
+     * If the sound is stopped, play from beginning
+     */
+    void ContinuePlaying();
 
-    void Pause()
-    {
-        m_sound.pause();
-    }
+    /**
+     * Pause the sound, if we are playing. Otherwise, does nothing
+     */
+    void Pause() { m_sound.pause(); }
 
-    void Stop()
-    {
-        m_sound.stop();
-    }
+    /**
+     * Resets the sound to the beginning
+     */
+    void Stop() { m_sound.stop(); }
 };
 
 

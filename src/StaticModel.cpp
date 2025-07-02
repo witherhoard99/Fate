@@ -11,9 +11,10 @@
 
 #include "FrustumCulling.h"
 
-StaticModel::StaticModel(Renderer &renderer, const std::string &sceneFilepath, Physics &physics, bool processModel)
+StaticModel::StaticModel(Renderer &renderer, const std::string &sceneFilepath, Physics &physics, FrustumCuller& frustumCuller, bool processModel)
     :   Model(renderer),
-        m_physics(physics)
+        m_physics(physics),
+        m_frustumCuller(frustumCuller)
 {
     //TODO: BIGGEST HACK OF ALL TIME. If the number of textures exceeds this
     //then all textures for this model break as the memory of the vector gets reallocated, and so the pointers become invalid
@@ -39,12 +40,9 @@ StaticModel::StaticModel(Renderer &renderer, const std::string &sceneFilepath, P
 
 void StaticModel::Draw(Shader &shader, const JPH::Mat44 &projectionMatrix, const JPH::Mat44 &viewMatrix)
 {
-    JPH::Mat44 LookViewMatrix = JPH::Mat44::sLookAt({0, 100, 0}, {0, 0, 0}, {0, 1, 0});
-    LookViewMatrix = viewMatrix;
-    shader.SetUniform("u_viewMatrix", LookViewMatrix); //TODO: Get rid of the useless code here that I used to test for frustum culling
-
-    glm::mat4 viewMatrixGLM = glm::make_mat4x4(reinterpret_cast<const float*>(&viewMatrix));
-    glm::mat4 projectionMatrixGLM = glm::make_mat4x4(reinterpret_cast<const float*>(&projectionMatrix));
+    JPH::Mat44 LookViewMatrix = JPH::Mat44::sLookAt({0, 13, 0}, {20, 1, 0}, {0, 1, 0});
+    // LookViewMatrix = viewMatrix;
+    shader.SetUniform("u_viewMatrix", LookViewMatrix); //TODO: Get rid of the code here that I used to test for frustum culling
 
     std::vector<JPH::BodyID> allBodyIDs(m_objects.size());
     for (int i = 0; i < m_objects.size(); ++i)
@@ -52,8 +50,12 @@ void StaticModel::Draw(Shader &shader, const JPH::Mat44 &projectionMatrix, const
         allBodyIDs[i] = m_objects[i].bodyID;
     }
 
-    std::vector<JPH::BodyID> toDraw = FrustumCulling::GetVisibleBodies(m_physics.GetBodyManager(), allBodyIDs, viewMatrixGLM, projectionMatrixGLM);
-    //TODO: Fix all of this mess, yes it makes a performance difference
+    // glm::mat4 viewMatrixGLM = glm::make_mat4x4(reinterpret_cast<const float*>(&viewMatrix));
+    // glm::mat4 projectionMatrixGLM = glm::make_mat4x4(reinterpret_cast<const float*>(&projectionMatrix));
+
+    // std::vector<JPH::BodyID> toDraw = FrustumCulling::GetVisibleBodies(m_physics.GetBodyManager(), allBodyIDs, viewMatrixGLM, projectionMatrixGLM);
+    std::vector<JPH::BodyID> toDraw = StaticModel::m_frustumCuller.GetVisibleBodies(m_physics.GetBodyManager(), allBodyIDs, viewMatrix, projectionMatrix);
+    //TODO: Fix all of this mess, it makes a performance difference
 
     auto contains = [&](std::vector<JPH::BodyID> &vector, JPH::BodyID target) -> bool {
         for (int i = 0; i < vector.size(); ++i)
@@ -65,7 +67,6 @@ void StaticModel::Draw(Shader &shader, const JPH::Mat44 &projectionMatrix, const
         return false;
     };
 
-    //Mainly get rid of this n^2 operation
     //Find which objects we want to draw
     for (int i = 0; i < allBodyIDs.size(); ++i)
     {
@@ -88,7 +89,11 @@ void StaticModel::Draw(Shader &shader, const JPH::Mat44 &projectionMatrix, const
 void StaticModel::Draw(Shader &shader, const JPH::Mat44 &projectionMatrix, const JPH::Mat44 &viewMatrix,
     const JPH::Mat44 &modelMatrix)
 {
-    Model::Draw(shader, projectionMatrix, viewMatrix, modelMatrix);
+    // Model::Draw(shader, projectionMatrix, viewMatrix, modelMatrix);
+    shader.SetUniform("u_viewMatrix", JPH::Mat44::sLookAt({0, 13, 0}, {20, 1, 0}, {0, 1, 0}));
+
+    for (Mesh& mesh : m_meshes)
+        mesh.Draw(m_renderer, shader, projectionMatrix * JPH::Mat44::sLookAt({0, 13, 0}, {20, 1, 0}, {0, 1, 0}), modelMatrix);
 }
 
 void StaticModel::ProcessNode(aiNode *node, const aiScene *scene, const std::string &directory, const JPH::Mat44& parentTransformation)

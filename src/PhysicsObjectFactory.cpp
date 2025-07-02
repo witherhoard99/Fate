@@ -24,7 +24,7 @@ PhysicsObjectFactory::Object PhysicsObjectFactory::ConstructSphere(const ObjectI
     JPH::BodyCreationSettings bodySettings{
         shape, objInfo.position,
         objInfo.rotation, JPH::EMotionType::Static,
-        ObjectLayers::NON_MOVING
+        JPHImpls::ObjectLayers::NON_MOVING
     };
 
     bodySettings.mOverrideMassProperties = JPH::EOverrideMassProperties::MassAndInertiaProvided;
@@ -79,7 +79,7 @@ PhysicsObjectFactory::Object PhysicsObjectFactory::ConstructStaticMesh(
     JPH::BodyCreationSettings bodySettings{
         shape, {0, 0, 0},
         JPH::Quat::sIdentity(), JPH::EMotionType::Static,
-        ObjectLayers::NON_MOVING
+        JPHImpls::ObjectLayers::NON_MOVING
     };
 
     bodySettings.mOverrideMassProperties = JPH::EOverrideMassProperties::MassAndInertiaProvided;
@@ -132,7 +132,7 @@ PhysicsObjectFactory::Object PhysicsObjectFactory::ConstructDynamicMesh(float ma
     JPH::BodyCreationSettings bodySettings{
         shape, {0, 0, 0},
         JPH::Quat::sIdentity(), JPH::EMotionType::Kinematic,
-        ObjectLayers::MOVING
+        JPHImpls::ObjectLayers::MOVING
     };
 
     bodySettings.mOverrideMassProperties = JPH::EOverrideMassProperties::MassAndInertiaProvided;

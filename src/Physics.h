@@ -5,6 +5,8 @@
 #include "Renderer.h"
 #include "Shader.h"
 
+#include "JPHImpls.h"
+
 #include <cstdarg>
 #include <thread>
 
@@ -30,58 +32,9 @@
 #include "Physics/Collision/Shape/CapsuleShape.h"
 #include "Physics/Character/Character.h"
 
-namespace ObjectLayers
-{
-	static constexpr JPH::ObjectLayer NON_MOVING = 0;
-	static constexpr JPH::ObjectLayer MOVING = 1;
-	static constexpr JPH::ObjectLayer FLOOR = 2;
-
-	static constexpr JPH::ObjectLayer NUM_LAYERS = 3;
-}
-
-namespace BroadPhaseLayers
-{
-	static constexpr JPH::BroadPhaseLayer NON_MOVING(0);
-	static constexpr JPH::BroadPhaseLayer MOVING(1);
-	static constexpr JPH::uint NUM_LAYERS(2);
-}
-
 class Physics
 {
 private:
-
-	class ObjectLayerPairCollisionFilterImpl : public JPH::ObjectLayerPairFilter
-	{
-	public:
-		bool ShouldCollide(JPH::ObjectLayer inLayer1, JPH::ObjectLayer inLayer2) const override;
-	};
-
-
-
-	class BPLayerInterfaceImpl : public JPH::BroadPhaseLayerInterface
-	{
-	public:
-		BPLayerInterfaceImpl();
-		uint GetNumBroadPhaseLayers() const override;
-		JPH::BroadPhaseLayer GetBroadPhaseLayer(JPH::ObjectLayer inLayer) const override;
-
-#		if defined(JPH_EXTERNAL_PROFILE) || defined(JPH_PROFILE_ENABLED)
-			const char * GetBroadPhaseLayerName(JPH::BroadPhaseLayer inLayer) const override;
-#		endif
-
-	private:
-		JPH::BroadPhaseLayer mObjectToBroadPhase[ObjectLayers::NUM_LAYERS];
-
-	};
-
-
-
-	class ObjectVsBroadPhaseLayerFilterImpl : public JPH::ObjectVsBroadPhaseLayerFilter
-	{
-	public:
-		bool ShouldCollide(JPH::ObjectLayer inLayer1, JPH::BroadPhaseLayer inLayer2) const override;
-	};
-
 
 #ifdef JPH_DEBUG_RENDERER
 	class DebugRendererImpl : public JPH::DebugRendererSimple
@@ -146,9 +99,9 @@ private:
 	}
 
 
-	BPLayerInterfaceImpl m_BPLayerInterface;
-	ObjectVsBroadPhaseLayerFilterImpl m_objVsBPLayerFilter;
-	ObjectLayerPairCollisionFilterImpl m_objLayerPairCollisonFilter;
+	JPHImpls::BPLayerInterfaceImpl m_BPLayerInterface;
+	JPHImpls::ObjectVsBroadPhaseLayerFilterImpl m_objVsBPLayerFilter;
+	JPHImpls::ObjectLayerPairCollisionFilterImpl m_objLayerPairCollisonFilter;
 
 #ifdef JPH_DEBUG_RENDERER
 	DebugRendererImpl m_debugRenderer;

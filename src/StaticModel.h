@@ -1,6 +1,7 @@
 #ifndef STATICMODEL_H
 #define STATICMODEL_H
 
+#include "FrustumCulling.h"
 #include "Model.h"
 
 #include "Physics.h"
@@ -34,9 +35,10 @@ protected:
 
     Physics& m_physics;
     std::vector<PhysicsObjectFactory::Object> m_objects;
+    FrustumCuller& m_frustumCuller;
 
 public:
-    StaticModel(Renderer& renderer, const std::string& sceneFilepath, Physics& physics, bool processModel = true);
+    StaticModel(Renderer& renderer, const std::string& sceneFilepath, Physics& physics, FrustumCuller& frustumCuller, bool processModel = true);
     virtual void Draw(Shader& shader, const JPH::Mat44& projectionMatrix, const JPH::Mat44& viewMatrix) override;
     virtual void Draw(
         Shader& shader, const JPH::Mat44& projectionMatrix,

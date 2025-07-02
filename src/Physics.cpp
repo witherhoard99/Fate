@@ -171,7 +171,7 @@ void Physics::CharacterHandler::Init(JPH::PhysicsSystem &physicsSystem)
 
     JPH::CharacterSettings characterSettings;
     characterSettings.SetEmbedded();
-    characterSettings.mLayer = ObjectLayers::MOVING;
+    characterSettings.mLayer = JPHImpls::ObjectLayers::MOVING;
     characterSettings.mShape = characterShape;
 
     characterSettings.mEnhancedInternalEdgeRemoval = true;
@@ -215,87 +215,6 @@ void Physics::CharacterHandler::UpdateCharacter()
 JPH::RVec3 Physics::CharacterHandler::GetPosition()
 {
     return m_character->GetPosition();
-}
-
-
-/// Class to implement if 2 ObjectLayers are allowed to collide
-bool Physics::ObjectLayerPairCollisionFilterImpl::ShouldCollide(JPH::ObjectLayer inLayer1, JPH::ObjectLayer inLayer2) const
-{
-    switch (inLayer1)
-    {
-    case ObjectLayers::NON_MOVING:
-        return inLayer2 == ObjectLayers::MOVING;
-
-    case ObjectLayers::MOVING:
-        return true;
-
-    case ObjectLayers::FLOOR:
-        return inLayer2 == ObjectLayers::MOVING;
-
-    default:
-        JPH_ASSERT(false);
-        return false;
-    }
-}
-
-
-
-//<BPLayerInterfaceImpl>
-Physics::BPLayerInterfaceImpl::BPLayerInterfaceImpl()
-{
-    // Create a mapping table from object to broad phase layer
-    mObjectToBroadPhase[ObjectLayers::NON_MOVING] = BroadPhaseLayers::NON_MOVING;
-    mObjectToBroadPhase[ObjectLayers::MOVING] = BroadPhaseLayers::MOVING;
-    mObjectToBroadPhase[ObjectLayers::FLOOR] = BroadPhaseLayers::NON_MOVING;
-}
-
-uint Physics::BPLayerInterfaceImpl::GetNumBroadPhaseLayers() const
-{
-    return BroadPhaseLayers::NUM_LAYERS;
-}
-
-JPH::BroadPhaseLayer Physics::BPLayerInterfaceImpl::GetBroadPhaseLayer(JPH::ObjectLayer inLayer) const
-{
-    JPH_ASSERT(inLayer < ObjectLayers::NUM_LAYERS);
-    return mObjectToBroadPhase[inLayer];
-}
-
-#   if defined(JPH_EXTERNAL_PROFILE) || defined(JPH_PROFILE_ENABLED)
-        const char * Physics::BPLayerInterfaceImpl::GetBroadPhaseLayerName(JPH::BroadPhaseLayer inLayer) const
-        {
-            switch (static_cast<JPH::BroadPhaseLayer::Type>(inLayer))
-            {
-            case static_cast<JPH::BroadPhaseLayer::Type>(BroadPhaseLayers::NON_MOVING):
-                return "NON_MOVING";
-
-            case static_cast<JPH::BroadPhaseLayer::Type>(BroadPhaseLayers::MOVING):
-                return "MOVING";
-
-            default:
-                JPH_ASSERT(false);
-                return "INVALID";
-            }
-        }
-#   endif // defined(JPH_EXTERNAL_PROFILE) || defined(JPH_PROFILE_ENABLED)
-//<BPLayerInterfaceImpl>
-
-
-
-/// Basically mapping BroadPhaseLayers to ObjectLayers (or vice versa I guess)
-bool Physics::ObjectVsBroadPhaseLayerFilterImpl::ShouldCollide(JPH::ObjectLayer inLayer1, JPH::BroadPhaseLayer inLayer2) const
-{
-    switch (inLayer1)
-    {
-        case ObjectLayers::NON_MOVING:
-            return inLayer2 == BroadPhaseLayers::MOVING;
-
-        case ObjectLayers::MOVING:
-            return true;
-
-        default:
-            JPH_ASSERT(false);
-            return false;
-    }
 }
 
 #ifdef JPH_DEBUG_RENDERER

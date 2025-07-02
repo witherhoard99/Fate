@@ -18,6 +18,7 @@ class Scene1
 {
 private:
     Shader          m_modelShader;
+    FrustumCuller   m_frustumCuller;
 
     Input&          m_input;
     Physics&        m_physics;
@@ -38,8 +39,6 @@ private:
 
     const JPH::Mat44&   m_projMatrix;
     JPH::Mat44&         m_viewMatrix;
-
-    std::vector<JPH::Mat44> m_identityMatrixVector{JPH::Mat44::sIdentity()};
 
     Quads2D                 m_crosshair;
     Texture                 m_crosshairTexture;

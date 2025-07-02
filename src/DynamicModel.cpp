@@ -4,8 +4,8 @@
 #include "Physics/Collision/CastResult.h"
 #include "Physics/Collision/RayCast.h"
 
-DynamicModel::DynamicModel(Renderer& renderer, const std::string &sceneFilepath, Physics &physics) :
-    StaticModel(renderer, sceneFilepath, physics, false)
+DynamicModel::DynamicModel(Renderer& renderer, const std::string &sceneFilepath, Physics &physics, FrustumCuller& frustumCuller) :
+    StaticModel(renderer, sceneFilepath, physics, frustumCuller, false)
 {
     //All of the code is the exact same as StaticModel but we must override all methods so that we can all our ProcessMesh function, which is actually new code
     //this is because we cant call subclass methods from the superclass
@@ -31,8 +31,8 @@ DynamicModel::DynamicModel(Renderer& renderer, const std::string &sceneFilepath,
     DynamicModel::ProcessNode(scene->mRootNode, scene, sceneFilepath.substr(0, sceneFilepath.find_last_of('/')), JPH::Mat44::sIdentity());
 }
 
-DynamicModel::DynamicModel(Renderer &renderer, const std::string &sceneFilepath, Physics &physics, const JPH::Mat44 &transform):
-    StaticModel(renderer, sceneFilepath, physics, false)
+DynamicModel::DynamicModel(Renderer &renderer, const std::string &sceneFilepath, Physics &physics, FrustumCuller& frustumCuller, const JPH::Mat44 &transform):
+    StaticModel(renderer, sceneFilepath, physics, frustumCuller, false)
 {
     //All of the code is the exact same as StaticModel but we must override all methods so that we can all our ProcessMesh function, which is actually new code
     //this is because we cant call subclass methods from the superclass

@@ -18,8 +18,8 @@ private:
     ) override;
 
 public:
-    DynamicModel(Renderer& renderer, const std::string &sceneFilepath, Physics &physics);
-    DynamicModel(Renderer& renderer, const std::string &sceneFilepath, Physics &physics, const JPH::Mat44 &transform);
+    DynamicModel(Renderer& renderer, const std::string &sceneFilepath, Physics &physics, FrustumCuller& frustumCuller);
+    DynamicModel(Renderer& renderer, const std::string &sceneFilepath, Physics &physics, FrustumCuller& frustumCuller, const JPH::Mat44 &transform);
 
     void Draw(Shader &shader, const JPH::Mat44 &projectionMatrix, const JPH::Mat44 &viewMatrix) override;
     void Draw(Shader &shader, const JPH::Mat44 &projectionMatrix, const JPH::Mat44 &viewMatrix, const JPH::Mat44 &modelMatrix) override;
