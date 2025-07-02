@@ -156,7 +156,7 @@ size_t DefaultIOStream::FileSize() const {
         if (0 != err)
             return 0;
         mCachedSize = (size_t)(fileStat.st_size);
-#elif defined _WIN32
+#elif defined _WIN32 && !defined __MINGW32__
         struct _stat32 fileStat;
         //using fileno + fstat avoids having to handle the filename
         int err = _fstat32(_fileno(mFile), &fileStat);
