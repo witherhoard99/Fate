@@ -62,3 +62,7 @@ Fate is a 3D video game made in C++ using OpenGL and GLSL.
 ### Dev Dependency
 * ImGui - Useful for tuning / modifying values at runtime, saves lots of time
   * Is not required if DISABLE_IMGUI is set
+
+### Note
+Some of the commit messages are inaccurate because I did not realize I have to do `git add ./*` every single commit. 
+Therefore, some commit messages apply to later commits 
