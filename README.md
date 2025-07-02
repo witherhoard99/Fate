@@ -64,5 +64,5 @@ Fate is a 3D video game made in C++ using OpenGL and GLSL.
   * Is not required if DISABLE_IMGUI is set
 
 ### Note
-Some of the commit messages are inaccurate because I did not realize I have to do `git add ./*` every single commit. 
+Some of the commit messages are inaccurate because I did not realize I have to do `git add --all*` every single commit. 
 Therefore, some commit messages apply to later commits 

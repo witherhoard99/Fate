@@ -41,7 +41,7 @@ StaticModel::StaticModel(Renderer &renderer, const std::string &sceneFilepath, P
 void StaticModel::Draw(Shader &shader, const JPH::Mat44 &projectionMatrix, const JPH::Mat44 &viewMatrix)
 {
     JPH::Mat44 LookViewMatrix = JPH::Mat44::sLookAt({0, 13, 0}, {20, 1, 0}, {0, 1, 0});
-    // LookViewMatrix = viewMatrix;
+    LookViewMatrix = viewMatrix;
     shader.SetUniform("u_viewMatrix", LookViewMatrix); //TODO: Get rid of the code here that I used to test for frustum culling
 
     std::vector<JPH::BodyID> allBodyIDs(m_objects.size());
@@ -89,11 +89,12 @@ void StaticModel::Draw(Shader &shader, const JPH::Mat44 &projectionMatrix, const
 void StaticModel::Draw(Shader &shader, const JPH::Mat44 &projectionMatrix, const JPH::Mat44 &viewMatrix,
     const JPH::Mat44 &modelMatrix)
 {
-    // Model::Draw(shader, projectionMatrix, viewMatrix, modelMatrix);
-    shader.SetUniform("u_viewMatrix", JPH::Mat44::sLookAt({0, 13, 0}, {20, 1, 0}, {0, 1, 0}));
+    Model::Draw(shader, projectionMatrix, viewMatrix, modelMatrix);
+    // shader.SetUniform("u_viewMatrix", JPH::Mat44::sLookAt({0, 13, 0}, {20, 1, 0}, {0, 1, 0}));
 
     for (Mesh& mesh : m_meshes)
-        mesh.Draw(m_renderer, shader, projectionMatrix * JPH::Mat44::sLookAt({0, 13, 0}, {20, 1, 0}, {0, 1, 0}), modelMatrix);
+        mesh.Draw(m_renderer, shader, projectionMatrix * viewMatrix, modelMatrix);
+        // mesh.Draw(m_renderer, shader, projectionMatrix * JPH::Mat44::sLookAt({0, 13, 0}, {20, 1, 0}, {0, 1, 0}), modelMatrix);
 }
 
 void StaticModel::ProcessNode(aiNode *node, const aiScene *scene, const std::string &directory, const JPH::Mat44& parentTransformation)

@@ -54,8 +54,8 @@ Scene1::Scene1(
     m_spaceship2.SetRotation({0, AI_MATH_HALF_PI_F, 0});
 
     //We do this twice to lock the mouse (for some reason it does not lock by default)
-    // m_input.FlipMouseEnabled();
-    // m_input.FlipMouseEnabled();
+    m_input.FlipMouseEnabled();
+    m_input.FlipMouseEnabled();
 
     //Initialize ImGui
 #ifdef ENABLE_IMGUI

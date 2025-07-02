@@ -20,7 +20,12 @@ uniform bool u_haveSpecularTexture;
 float LightFallOff(float distance)
 {
     if (distance > 50) {
-        return (min(500.0 / pow(1.12, distance), 1.5)) / 1.5;
+        float divideFactor = abs(1.25 / (55 - distance));
+
+        if (divideFactor < 1)
+            divideFactor = 1;
+
+        return (min(500.0 / pow(1.12, distance), 1.5)) / divideFactor;
     }
     return min(500.0 / pow(1.12, distance), 1.5);
 }
@@ -39,8 +44,9 @@ void main()
     float distance = abs(length(v_lightPos - v_viewSpaceCoord));
     l_color = texture(u_textureDiffuse0, v_texCoord);
 
-    if (distance > 50) {
-        return;//If the distance is greater than 53, then we can just return immedietly as light will have next to no effect
+    if (distance > 55) {
+        l_color.rgb = l_color.rgb / 8;
+        return; //If the distance is greater than 55, then we can just return immedietly as light will have next to no effect
     }
 
     float lightIntensityDiffuse = LightFallOff(distance);
