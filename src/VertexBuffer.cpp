@@ -1,20 +1,18 @@
 #include "VertexBuffer.h"
 #include <GL/glew.h>
 
-VertexBuffer::VertexBuffer() {}
-
 VertexBuffer::VertexBuffer(const void *data, uint size)
 {
 	glGenBuffers(1, &m_rendererID);
 	glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
-	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STREAM_DRAW); //TODO: Test performance with different modes
+	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 }
 
 void VertexBuffer::Init(const void *data, uint size)
 {
 	glGenBuffers(1, &m_rendererID);
 	glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
-	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STREAM_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW);
 }
 
 

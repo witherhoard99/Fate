@@ -7,11 +7,6 @@ Mesh::Mesh(const std::vector<vertexUVNormal> &vertices, const std::vector<uint> 
 
 void Mesh::Init(const std::vector<vertexUVNormal> &vertices, const std::vector<uint> &indices, const std::vector<const Texture*> &textures, const JPH::Mat44& modelMatrix, Error& error)
 {
-    //TODO: I don't think we need to do this actually
-    //TODO: (IMMEDIATE) Assign the texture, and when doing so ensure that there are not more than 16 textures needed for a mesh
-    //TODO: (IMMEDIATE) Check if mesh has too many diffuse, or specular textures (more than whatever number we declared in the shader)
-    //If so throw an error
-
     m_textures = textures;
     m_modelMatrix = modelMatrix;
 

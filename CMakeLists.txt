@@ -18,7 +18,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
     set(OpenGL_GL_PREFERENCE GLVND)
 endif()
 
-# All compile definitions
+# All compile definitions and options
 # assimp has "#pragma warnings" that stop compilation due to -Werror
 add_compile_options(-Wno-unknown-pragmas)
 add_compile_definitions(GLEW_STATIC)
@@ -67,6 +67,8 @@ add_executable(learnOpenGL
         src/Texture.cpp
         src/Texture.h
 
+        src/Quads2D.cpp
+        src/Quads2D.h
         src/Quads3D.cpp
         src/Quads3D.h
         src/Constants.h
@@ -74,11 +76,15 @@ add_executable(learnOpenGL
         src/Player.h
         src/Input.cpp
         src/Input.h
+        src/Audio.cpp
+        src/Audio.h
 
         src/Physics.cpp
         src/Physics.h
         src/PhysicsObjectFactory.cpp
         src/PhysicsObjectFactory.h
+        src/JPHImpls.cpp
+        src/JPHImpls.h
 
         src/Model.cpp
         src/Model.h
@@ -118,17 +124,11 @@ add_executable(learnOpenGL
 
         vendor/stb_image/stb_image.cpp
         vendor/stb_image/stb_image.h
-        src/Audio.cpp
-        src/Audio.h
-        src/Quads2D.cpp
-        src/Quads2D.h
-        src/JPHImpls.cpp
-        src/JPHImpls.h
 )
 
 # More assimp stuff (https://github.com/unsettledgames/debut-engine/blob/main/Debut/CMakeLists.txt)
 # Also, for some reason this configure_file seems to be super inconsistent on linux
-# It will say file not found half the time but not the other half of the time
+# It will say `file not found` half the time but not the other half of the time
 configure_file("${CMAKE_SOURCE_DIR}/Dependencies/assimp/include/assimp/config.h.in" "${CMAKE_SOURCE_DIR}/Dependencies/assimp/include/assimp/config.h")
 configure_file("${CMAKE_SOURCE_DIR}/Dependencies/assimp/contrib/zlib/zconf.h.cmakein" "${CMAKE_SOURCE_DIR}/Dependencies/assimp/contrib/zlib/zconf.h")
 
@@ -167,7 +167,7 @@ if (WIN32)
 
     # I'm not sure from what library, but we have massive stack allocations that can sometimes cause a stack overflow on windows
     # So we need to increase the stack size
-    # My guess is that it is from Jolt (JPH_PROFILE_THREAD)?
+    # My guess is that it is from Jolt (JPH_PROFILE_THREAD). This should not happen in release mode regardless.
     # Linux allocates more stack space by default so we are fine on linux, and linux stack size is set at runtime anyway
     if (MSVC)
         target_link_options(learnOpenGL PRIVATE "/STACK:8388608")
@@ -176,7 +176,7 @@ if (WIN32)
     endif()
 endif ()
 
-# All linking of libraries
+# Link Libraries
 target_link_libraries(learnOpenGL glfw)
 target_link_libraries(learnOpenGL Jolt)
 target_link_libraries(learnOpenGL glew_s)

@@ -7,8 +7,9 @@ class VertexBuffer
 {
 private:
 	uint m_rendererID;
+
 public:
-	VertexBuffer();
+	VertexBuffer() = default;
 	VertexBuffer(const void* data, uint size);
 
 	VertexBuffer(const VertexBuffer&) = delete; //No copying!!! Leads to us after free issues

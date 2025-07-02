@@ -1,2 +1,0 @@
-* Get rid of Quads3d and all of the vectors of model matricies and replace them with StaticObject/Model
-* Write copy constructors for vertex buffer, index buffer, etc

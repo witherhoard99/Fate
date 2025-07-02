@@ -50,10 +50,6 @@ void StaticModel::Draw(Shader &shader, const JPH::Mat44 &projectionMatrix, const
         allBodyIDs[i] = m_objects[i].bodyID;
     }
 
-    // glm::mat4 viewMatrixGLM = glm::make_mat4x4(reinterpret_cast<const float*>(&viewMatrix));
-    // glm::mat4 projectionMatrixGLM = glm::make_mat4x4(reinterpret_cast<const float*>(&projectionMatrix));
-
-    // std::vector<JPH::BodyID> toDraw = FrustumCulling::GetVisibleBodies(m_physics.GetBodyManager(), allBodyIDs, viewMatrixGLM, projectionMatrixGLM);
     std::vector<JPH::BodyID> toDraw = StaticModel::m_frustumCuller.GetVisibleBodies(m_physics.GetBodyManager(), allBodyIDs, viewMatrix, projectionMatrix);
     //TODO: Fix all of this mess, it makes a performance difference
 
@@ -173,7 +169,7 @@ void StaticModel::ProcessMesh(
 
     outIndices.shrink_to_fit();
 
-    //TODO: Check if the 1000 mass is okay. Should be since these are static objects and mass shouldn't even matter.
+    //Static objects's mass should not matter
     m_objects.emplace_back(PhysicsObjectFactory::ConstructStaticMesh(1000, m_physics, positions, outIndices, transform));
 
     LoadMaterialTextures(material, aiTextureType_DIFFUSE, Texture::TextureType::diffuse, directory, outTextures);

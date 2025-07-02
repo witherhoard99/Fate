@@ -211,9 +211,9 @@ void Player::ProcessMouseMovement(float deltaTime)
 void Player::UpdateCameraVectors()
 {
 	JPH::Vec3 front;
-	front.SetX(cos(glm::radians(m_yaw)) * cos(glm::radians(m_pitch)));
-	front.SetY(sin(glm::radians(m_pitch)));
-	front.SetZ(sin(glm::radians(m_yaw)) * cos(glm::radians(m_pitch)));
+	front.SetX(std::cos(JPH::DegreesToRadians(m_yaw)) * std::cos(JPH::DegreesToRadians(m_pitch)));
+	front.SetY(std::sin(JPH::DegreesToRadians(m_pitch)));
+	front.SetZ(std::sin(JPH::DegreesToRadians(m_yaw)) * std::cos(JPH::DegreesToRadians(m_pitch)));
 
 	m_front = front.Normalized();
 	m_right = front.Cross(m_worldUp).Normalized();  // normalize the vectors, because their length gets closer to 0 the more you look up or down which results in slower movement.

@@ -15,7 +15,6 @@ Model::Model(Renderer& renderer, const std::string& sceneFilepath)
         "Error with loading model:" << importer.GetErrorString() << " with path " << sceneFilepath
     );
 
-    //TODO: Check if the '/' still works on windows
     ProcessNode(scene->mRootNode, scene, sceneFilepath.substr(0, sceneFilepath.find_last_of('/')), JPH::Mat44::sIdentity());
 }
 

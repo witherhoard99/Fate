@@ -94,7 +94,7 @@ Application::Application(GLFWwindow* window)
     :   m_physicsShader("../resources/shaders/PhysicsVertex.glsl", "../resources/shaders/PhysicsFrag.glsl"),
         m_window(window),
         m_projMatrix(JPH::Mat44::sPerspective(
-            glm::radians(75.f),
+            JPH::DegreesToRadians(75.f),
             (float)Util::options.scrWidth / (float)Util::options.scrHeight,
             0.1f,
             1000.f
