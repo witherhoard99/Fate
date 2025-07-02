@@ -43,7 +43,7 @@ Fate is a 3D video game made in C++ using OpenGL and GLSL. It does not make use 
     git clone https://github.com/witherhoard99/Fate.git
     cd Fate
     cmake -S . -B ./build/release -DCMAKE_BUILD_TYPE="Release" -DCMAKE_POLICY_VERSION_MINIMUM="3.5"
-    cmake --build -j [num threads]
+    cmake --build ./build/release -j [num threads]
 ```
 
 <br/>
