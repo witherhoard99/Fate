@@ -19,7 +19,7 @@ namespace Constants
 	constexpr float DEADZONE = 0.0002f;
 
 	constexpr float maxDistanceFromGroundToStillBeOnTheGround = 0.1;
-	constexpr bool	benchmark = true;
+	constexpr bool	benchmark = false;
 }
 
 #endif //CONSTANTS_H

@@ -93,7 +93,7 @@ namespace Util
 		int numMSAASamples = 2; //Set to -1 to disable
 
 		const char* windowTitle = "OpenGL";
-		bool vsync = false;
+		bool vsync = true;
 		bool fullscreen = true; //IMPORTANT: Fullscreen causes computer to freeze when using GDB
 	};
 

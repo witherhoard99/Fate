@@ -1,10 +1,3 @@
-# TODO:
-  * Do the other TODOs in the README (make the binaries, and link their URL in the README)
-  * Fix FrustumCullling.h
-    * The bodies were never added to the JPH::PhysicsSystem, so the narrow phase query does not work
-    * Either use the JPH::PhysicsSystem we already have, or add all of the bodies to the new physicsSystem
-
-
 # Fate
 Fate is a 3D video game made in C++ using OpenGL and GLSL. 
 
@@ -66,3 +59,10 @@ Fate is a 3D video game made in C++ using OpenGL and GLSL.
 ### Note
 Some of the commit messages are inaccurate because I did not realize I have to do `git add --all*` every single commit. 
 Therefore, some commit messages apply to later commits 
+
+### TODO:
+* Do the other TODOs in the README (make the binaries, and link their URL in the README)
+* Fix FrustumCullling.h's shape testing (AABB works well)
+    * The bodies were never added to the JPH::PhysicsSystem, so the narrow phase query does not work
+    * Either use the JPH::PhysicsSystem we already have, or add all of the bodies to the new physicsSystem
+* Add more advanced lighting, with support for multiple lights
