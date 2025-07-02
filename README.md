@@ -39,11 +39,12 @@ Fate is a 3D video game made in C++ using OpenGL and GLSL. It does not make use 
 ### Commands
 * TODO: CHECK THESE COMMANDS ARE CORRECT ON LINUX AND WINDOWS
 * Replace `[num threads]` with the number of threads you want (or use `$(nproc)` on linx)
+* If you are on Windows, replace the forward slashes with backslashes (`./cmake-build-release/` -> `.\cmake-build-release\`)
 ```
     git clone https://github.com/witherhoard99/Fate.git
     cd Fate
-    cmake -S . -B ./build/release -DCMAKE_BUILD_TYPE="Release" -DCMAKE_POLICY_VERSION_MINIMUM="3.5"
-    cmake --build ./build/release -j [num threads]
+    cmake -S . -B ./cmake-build-release/ -DCMAKE_BUILD_TYPE="Release" -DCMAKE_POLICY_VERSION_MINIMUM="3.5"
+    cmake --build ./cmake-build-release/ -j [num threads]
 ```
 
 <br/>
