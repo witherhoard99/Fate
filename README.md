@@ -7,12 +7,13 @@ Fate is a 3D video game and game engine made in C++ using OpenGL and GLSL.
 
 ### How to Play
 * Uses WASD for movement
-  * W is forward
-  * S is backward
-  * A is right
-  * D is left
+  * W to go forward
+  * S to go backward
+  * A to go right
+  * D to go left
+  * Space to go up
 * Use mouse for looking around
-* Left click is shoot
+* Left click to shoot
 * Press shift to move faster
 
 ### How to Run
