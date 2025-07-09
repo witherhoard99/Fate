@@ -1,5 +1,5 @@
 # About Fate
-Fate is a 3D video game made in C++ using OpenGL and GLSL. It does not make use of any game engines.
+Fate is a 3D video game and game engine made in C++ using OpenGL and GLSL. 
 
 <br/>
 
