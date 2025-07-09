@@ -38,7 +38,6 @@ Fate is a 3D video game and game engine made in C++ using OpenGL and GLSL.
 * The windows binaries were cross compiled
 
 ### Commands
-* TODO: CHECK THESE COMMANDS ARE CORRECT ON LINUX AND WINDOWS
 * Replace `[num threads]` with the number of threads you want (or use `$(nproc)` on linx)
 * If you are on Windows, replace the forward slashes with backslashes (`./cmake-build-release/` -> `.\cmake-build-release\`)
 ```
